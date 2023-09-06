@@ -3,8 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-//val navVersion = "2.7.1"
-
 android {
     namespace = "com.example.quizapp"
     compileSdk = 34
@@ -38,6 +36,8 @@ android {
 }
 
 dependencies {
+
+    val navVersion = "2.7.1"
 
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
