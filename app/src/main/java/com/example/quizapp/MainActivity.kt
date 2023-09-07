@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.appbar.MaterialToolbar
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,14 +29,21 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         // Get the NavController associated with the NavHostFragment
         val navController = navHostFragment.navController
+        val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         // Create an AppBarConfiguration based on the NavController's graph
         val builder = AppBarConfiguration.Builder(navController.graph)
+        builder.setOpenableLayout(drawer)
         val appBarConfiguration = builder.build()
         // Set up the toolbar with the NavController and AppBarConfiguration
         toolbar.setupWithNavController(navController, appBarConfiguration)
 
+        // bottom navigation
         val bottomNavView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavView.setupWithNavController(navController)
+
+        // navigation drawer
+        val navView = findViewById<NavigationView>(R.id.nav_view)
+        NavigationUI.setupWithNavController(navView, navController)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
